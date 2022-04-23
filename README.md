@@ -3,6 +3,7 @@
 ## 1. Introdução
 O programa **ParsingPDF** desenvolvido por **LVS** tem o propósito de fazer a conversão de arquivos PDF gerados pela Fatec para um banco de dados utilizável. Essa necessidade surgiu quando ofereceram uma proposta ao meu grupo de TCC. A proposta é de criar uma carteirinha virtual para rodar um aplicativo no sistema Android e iOS, mas tínhamos essa limitação, não podíamos ter acesso ao BD do CTPS, apenas a um pdf com os dados.
 Este programa possui 4 subprogramas principais:
+
     1. imageExtractor: Serve para extrair a foto do aluno e o qr code.
     2. constructor: Serve para extrair os dados escritos e criar um DataFrame com eles e as fotos.
     3. banco: Serve para fazer a conexão com o banco de dados, criar a tabela e fazer a inserção deles.
