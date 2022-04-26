@@ -24,6 +24,11 @@ Agora se estiver no _Windows_ só execute **ParsingPDF.bat**, agora se for rodar
 ```
 python app.py
 ```
+## 4. Erros
+
+### 1. Erro ao conectar com o SQL Server, erro 18456
+Ester erro acontece devido a opção de conexão pelos metodos do Sql Server virem desligados, resolvi o esseo desta forma [aqui](https://youtu.be/U8T16HpcS5E). 
+
 
 
 ### Created By: LVS
