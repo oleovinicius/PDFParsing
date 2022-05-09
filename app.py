@@ -10,7 +10,6 @@ class teladoprogrma:
         self.window = None
         self.pathPdf = None
         self.server = None
-        self.database = None
         self.username = None
         self.password = None
         self.dataframe = None
@@ -74,10 +73,17 @@ class teladoprogrma:
          # Passo 3: conexão com banco de dados
          # https://www.youtube.com/watch?v=U8T16HpcS5E
         self.addlog("Criando instancia banco") 
-        self.bdinstance = banco.conexaoBancodeDados(self.server,self.database,self.username,self.password,self.dataframe)
+        self.bdinstance = banco.conexaoBancodeDados(self.server,self.username,self.password,self.dataframe)
         self.addlog("Conectando ao banco") 
         self.bdinstance.conectandoaoBD()
-        
+
+    def criarDatabase(self):
+        self.bdinstance.createDb()
+    
+    def usedb(self):
+        self.bdinstance.useDB()
+    
+
     def bdCriarTabela(self):
         self.addlog("Criando tabelas banco") 
         self.bdinstance.criandoTabelaAlunos()
@@ -91,6 +97,7 @@ class teladoprogrma:
         shutil.rmtree(cwd)
         cwd = os.getcwd() + "\\qrcode"
         shutil.rmtree(cwd)
+
         
 
     def criacaoTela(self):
@@ -98,8 +105,7 @@ class teladoprogrma:
         sg.theme('Reddit')
         # Layout do programa
         layout =[   [sg.Text('Path PDF:'), sg.Input(key='pathpdf'),sg.FileBrowse(key='selecionar_path')],
-                    [sg.Text('Server SQL:'), sg.Input(key='serversql')],
-                    [sg.Text('Database:'), sg.Input(key='database')],
+                    [sg.Text('Server MySql:'), sg.Input(key='serversql')],
                     [sg.Text('Username:'), sg.Input(key='usuario')],
                     [sg.Text('Password:'), sg.Input(key='senha', password_char='*')],
                     [sg.Text('Log:')],
@@ -108,7 +114,9 @@ class teladoprogrma:
                     #sg.Button('Conferir',key='conferir'),
                     sg.Button('Executar',key='execute'),
                     sg.Button('Conectar BD',key='bd'),
-                    sg.Button('Criar Tabela',key='bdcreate'),
+                    sg.Button('Criar DB',key='bdcreate'),
+                    sg.Button('Usar DB', key ='usedb'),
+                    sg.Button('Criar Tabela', key ='tableCreate'),
                     sg.Button('Inserir',key='bdinserir')]
                     ]
         # Janela
@@ -138,7 +146,6 @@ class teladoprogrma:
             if event == 'execute':
                 self.pathPdf = values['pathpdf']
                 self.server = values['serversql']
-                self.database = values['database']
                 self.username = values['usuario']
                 self.password = values['senha']
                 try:
@@ -151,7 +158,6 @@ class teladoprogrma:
             if event == 'bd':
                 self.pathPdf = values['pathpdf']
                 self.server = values['serversql']
-                self.database = values['database']
                 self.username = values['usuario']
                 self.password = values['senha']
                 try:
@@ -163,10 +169,9 @@ class teladoprogrma:
                     'TypeError:',TypeError,
                      'Name Error:',NameError )
                      
-            if event == 'bdcreate':
+            if event == 'tableCreate':
                 self.pathPdf = values['pathpdf']
                 self.server = values['serversql']
-                self.database = values['database']
                 self.username = values['usuario']
                 self.password = values['senha']
                 try:
@@ -177,10 +182,39 @@ class teladoprogrma:
                     'TypeError:',TypeError,
                      'Name Error:',NameError )
 
+            if event == 'bdcreate':
+                self.pathPdf = values['pathpdf']
+                self.server = values['serversql']
+                self.username = values['usuario']
+                self.password = values['senha']
+                try:
+                    self.criarDatabase()
+                    sg.popup('Database Criada')
+                except(RuntimeError, TypeError, NameError):
+                    sg.popup('Erro banco de dados',
+                    'runtime error:',RuntimeError,
+                    'TypeError:',TypeError,
+                     'Name Error:',NameError )
+
+            if event == 'usedb':
+                self.pathPdf = values['pathpdf']
+                self.server = values['serversql']
+                self.username = values['usuario']
+                self.password = values['senha']
+                try:
+                    self.usedb()
+                    sg.popup('Usando')
+                except(RuntimeError, TypeError, NameError):
+                    sg.popup('Erro banco de dados',
+                    'runtime error:',RuntimeError,
+                    'TypeError:',TypeError,
+                     'Name Error:',NameError )
+
+            
+
             if event == 'bdinserir':  
                 self.pathPdf = values['pathpdf']
                 self.server = values['serversql']
-                self.database = values['database']
                 self.username = values['usuario']
                 self.password = values['senha']
                 try:
