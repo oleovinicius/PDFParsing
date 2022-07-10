@@ -29,6 +29,9 @@ python app.py
 ### 1. Erro ao conectar com o SQL Server, erro 18456
 Ester erro acontece devido a opção de conexão pelos metodos do Sql Server virem desligados, resolvi o esseo desta forma [aqui](https://youtu.be/U8T16HpcS5E). 
 
+## 5. VIDEO DE DEMONSTRAÇÃO
+
+Fiz um vídeo de demonstração que pode ser visto neste [link](https://www.youtube.com/watch?v=ENl6wnzvNJo&list=PL7x94A_4QFyctITHBR_ilP0IAi1HvcQZq&index=2&ab_channel=leovin%C3%ADcius), a unica alteraçÀo foi que em vez de usar o banco de dados SQL server passamos a usar o MySQL mesmo.
 
 
-### Created By: LVS
+### Created By: LEVINSI
